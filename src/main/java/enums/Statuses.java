@@ -1,6 +1,6 @@
-package Enums;
+package enums;
 
-import Utils.RandomGenerator;
+import utils.RandomGenerator;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -9,11 +9,11 @@ public enum Statuses {
     Available("Available"),
     AvailableLowerCase("available"),
     Pending("Pending"),
-    Sold ("Sold"),
-    NotExisted ("NotExisted"),
-    Null (null),
+    Sold("Sold"),
+    NotExisted("NotExisted"),
+    Null(null),
     Empty(""),
-    SpecialCharacters(RandomGenerator.specialCharactersString);
+    SpecialCharacters(RandomGenerator.SPECIAL_CHARACTERS_STRING);
 
     public String getName() {
         return name;
@@ -21,12 +21,11 @@ public enum Statuses {
 
     private final String name;
 
-    private Statuses(String name) {
+    Statuses(String name) {
         this.name = name;
     }
 
-    public static Statuses GetStatusByName(String name)
-    {
+    public static Statuses getStatusByName(final String name) {
         return Arrays.stream(Statuses.values())
                 .filter(status -> status.name.equals(name))
                 .findFirst()

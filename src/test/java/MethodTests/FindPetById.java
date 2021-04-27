@@ -1,7 +1,7 @@
 package MethodTests;
 
-import Models.Pet;
-import Steps.Steps;
+import models.Pet;
+import steps.Steps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -21,15 +21,15 @@ public class FindPetById {
 
     @Test(dataProvider = "possible-ids-to-create-pet")
     public void findPetByExistedId(Pet pet, String scenarioDescription) throws IOException {
-        var createdPet = Steps.CreatePet(pet);
-        var foundPet = Steps.GetPet(createdPet.getId());
-        Steps.AssertThatThisIsExpectedPet(createdPet, foundPet,
+        var createdPet = Steps.createPet(pet);
+        var foundPet = Steps.getPet(createdPet.getId());
+        Steps.assertThatThisIsExpectedPet(createdPet, foundPet,
                 "Pet is found by existed id" + scenarioDescription);
     }
 
     @Test
-    public void findPetByNotExistedId() throws IOException {
+    public void findPetByNotExistedId() {
         var pet = new Pet().withSimpleFields();
-        Steps.GetNotExistedPet(pet);
+        Steps.getNotExistedPet(pet);
     }
 }

@@ -1,8 +1,8 @@
 package MethodTests;
 
-import Enums.Statuses;
-import Models.Pet;
-import Steps.Steps;
+import enums.Statuses;
+import models.Pet;
+import steps.Steps;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,8 +23,8 @@ public class FindPetsByStatus {
 
     @Test(dataProvider = "statuses")
     public void findPetByStatus(Statuses status, String scenarioDescription) throws IOException {
-        var pet = Steps.CreatePet(new Pet().withSimpleFields().withStatus(status));
-        var pets = Steps.GetPetsByStatuses(status);
+        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(status));
+        var pets = Steps.getPetsByStatuses(status);
         Assert.assertTrue(pets.contains(pet),
                 "There is created pet in the list for status:" + scenarioDescription);
     }
@@ -39,17 +39,17 @@ public class FindPetsByStatus {
 
     @Test(dataProvider = "emptyStatuses")
     public void findPetByEmptyStatus(Statuses status, String scenarioDescription) throws IOException {
-        var pet = Steps.CreatePet(new Pet().withSimpleFields().withStatus(status));
-        var pets = Steps.GetPetsByStatuses(status);
+        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(status));
+        var pets = Steps.getPetsByStatuses(status);
         Assert.assertTrue(pets.contains(pet),
                 "There is created pet in the list for status:" + scenarioDescription);
     }
 
     @Test
     public void findPetsByMultipleStatuses() throws IOException {
-        var availablePet = Steps.CreatePet(new Pet().withSimpleFields().withStatus(Statuses.Available));
-        var soldPet = Steps.CreatePet(new Pet().withSimpleFields().withStatus(Statuses.Sold));
-        var pets = Steps.GetPetsByStatuses(Statuses.Available, Statuses.Sold);
+        var availablePet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Available));
+        var soldPet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Sold));
+        var pets = Steps.getPetsByStatuses(Statuses.Available, Statuses.Sold);
         Assert.assertTrue(pets.contains(availablePet) ,
                 "There is created pet in the list for status:" + Statuses.Available);
         Assert.assertTrue(pets.contains(soldPet) ,
@@ -58,14 +58,14 @@ public class FindPetsByStatus {
 
     @Test
     public void findPetsWithoutStatus() throws IOException {
-        var pets = Steps.GetPetsByStatuses();
+        var pets = Steps.getPetsByStatuses();
         Assert.assertTrue(pets.isEmpty(),"none of pets should be returned");
     }
 
     @Test
     public void checkThatStatusIsNotCaseSensitive() throws IOException {
-        var pet = Steps.CreatePet(new Pet().withSimpleFields().withStatus(Statuses.Available));
-        var pets = Steps.GetPetsByStatuses(Statuses.AvailableLowerCase);
+        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Available));
+        var pets = Steps.getPetsByStatuses(Statuses.AvailableLowerCase);
         Assert.assertTrue(pets.contains(pet),
                 "There is created pet in the list for status:" + Statuses.Available);
     }

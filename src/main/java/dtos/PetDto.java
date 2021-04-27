@@ -1,4 +1,4 @@
-package DTOs;
+package dtos;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -11,7 +11,7 @@ public class PetDto extends KeyNameDto {
         return category;
     }
 
-    public void setCategory(KeyNameDto category) {
+    public void setCategory(final KeyNameDto category) {
         this.category = category;
     }
 
@@ -19,7 +19,7 @@ public class PetDto extends KeyNameDto {
         return photoUrls;
     }
 
-    public void setPhotoUrls(ArrayList<String> photoUrls) {
+    public void setPhotoUrls(final ArrayList<String> photoUrls) {
         this.photoUrls = photoUrls;
     }
 
@@ -27,7 +27,7 @@ public class PetDto extends KeyNameDto {
         return tags;
     }
 
-    public void setTags(List<KeyNameDto> tags) {
+    public void setTags(final List<KeyNameDto> tags) {
         this.tags = tags;
     }
 
@@ -35,13 +35,11 @@ public class PetDto extends KeyNameDto {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
-    private Long id;
     private KeyNameDto category;
-    private String name;
     private ArrayList<String> photoUrls;
     private List<KeyNameDto> tags = new ArrayList<>();
     private String status;

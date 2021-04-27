@@ -1,17 +1,20 @@
-package Models;
+package models;
 
-import Utils.RandomGenerator;
+import utils.RandomGenerator;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Objects;
 import java.util.Random;
 
 public class KeyName {
+    protected static final int NAME_LENGTH = 25;
+    private static final int LONG_NAME_LENGTH = 250;
+    private static final int SUPER_LONG_NAME_LENGTH = 1000;
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -19,26 +22,26 @@ public class KeyName {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
-    public Long id;
-    public String name;
+    private Long id;
+    private String name;
 
     public KeyName() {
         setId(RandomGenerator.getRandomPositiveIntAsLong());
-        setName(RandomGenerator.getRandomString(25));
+        setName(RandomGenerator.getRandomString(NAME_LENGTH));
     }
 
-    public KeyName(KeyName keyName) {
+    public KeyName(final KeyName keyName) {
         setId(keyName.getId());
         setName(keyName.getName());
     }
 
     public KeyName withNegativeId() {
         var random = new Random();
-        setId(-Math.abs((long)random.nextInt()));
+        setId(-Math.abs((long) random.nextInt()));
         return this;
     }
 
@@ -62,30 +65,34 @@ public class KeyName {
         return this;
     }
 
-    public KeyName withName(String name) {
+    public KeyName withName(final String name) {
         setName(name);
         return this;
     }
 
-    public KeyName withId(Long id) {
+    public KeyName withId(final Long id) {
         setId(id);
         return this;
     }
 
     public KeyName withNameWithSpecialCharacters() {
-        setName(RandomGenerator.getRandomStringWithSpecialCharacters(25));
+        setName(RandomGenerator.getRandomStringWithSpecialCharacters(NAME_LENGTH));
         return this;
     }
 
     public KeyName withLongName() {
-        setName(RandomStringUtils.randomAlphabetic(250, 1000));
+        setName(RandomStringUtils.randomAlphabetic(LONG_NAME_LENGTH, SUPER_LONG_NAME_LENGTH));
         return this;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof KeyName)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof KeyName)) {
+            return false;
+        }
         KeyName keyName = (KeyName) o;
         return getId().equals(keyName.getId())
                 && Objects.equals(getName(), keyName.getName());
@@ -98,9 +105,9 @@ public class KeyName {
 
     @Override
     public String toString() {
-        return "KeyName{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "KeyName{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 }

@@ -1,15 +1,15 @@
-package Utils;
+package utils;
 
-import DTOs.KeyNameDto;
-import DTOs.PetDto;
-import Enums.Statuses;
-import Models.KeyName;
-import Models.Pet;
+import dtos.KeyNameDto;
+import dtos.PetDto;
+import enums.Statuses;
+import models.KeyName;
+import models.Pet;
 
 public class ModelsConvertor {
 
-    public static PetDto ConvertToDto(Pet pet)
-    {
+    private ModelsConvertor() { }
+    public static PetDto ConvertToDto(final Pet pet) {
         var petDto = new PetDto();
         petDto.setId(pet.getId());
         petDto.setName(pet.getName());
@@ -20,8 +20,7 @@ public class ModelsConvertor {
         var tagDtos = pet
                 .getTags()
                 .stream()
-                .map(tag ->
-                    {
+                .map(tag -> {
                         var tagDto = new KeyNameDto();
                         tagDto.setId(tag.getId());
                         tagDto.setName(tag.getName());
@@ -34,8 +33,7 @@ public class ModelsConvertor {
         return petDto;
     }
 
-    public static Pet ConvertToPet(PetDto petDto)
-    {
+    public static Pet convertToPet(final PetDto petDto) {
         var pet = new Pet();
         pet.setId(petDto.getId());
         pet.setName(petDto.getName());
@@ -43,7 +41,7 @@ public class ModelsConvertor {
                 ? new KeyName().withId(petDto.getCategory().getId()).withName(petDto.getCategory().getName())
                 : null;
         pet.setCategory(category);
-        pet.setStatus(petDto.getStatus() != null ? Statuses.GetStatusByName(petDto.getStatus()) : null);
+        pet.setStatus(petDto.getStatus() != null ? Statuses.getStatusByName(petDto.getStatus()) : null);
         var tags =
                 petDto.getTags()
                         .stream()

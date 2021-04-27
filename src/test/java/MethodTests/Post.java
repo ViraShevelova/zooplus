@@ -1,9 +1,9 @@
 package MethodTests;
 
-import Enums.Statuses;
-import Models.KeyName;
-import Models.Pet;
-import Steps.Steps;
+import enums.Statuses;
+import models.KeyName;
+import models.Pet;
+import steps.Steps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -25,8 +25,8 @@ public class Post {
 
     @Test (dataProvider = "possible-ids-to-create-pet")
     public void createPetWithDifferentIds(Pet pet, String scenarioDescription) throws IOException {
-        var responsePet = Steps.CreatePet(pet);
-        Steps.AssertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
     @DataProvider(name = "possible-names-to-create-pet")
@@ -41,8 +41,8 @@ public class Post {
 
     @Test (dataProvider = "possible-names-to-create-pet")
     public void createPetWithDifferentNames(Pet pet, String scenarioDescription) throws IOException {
-        var responsePet = Steps.CreatePet(pet);
-        Steps.AssertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
     @DataProvider(name = "possible-statuses-to-create-pet")
@@ -63,8 +63,8 @@ public class Post {
 
     @Test (dataProvider = "possible-statuses-to-create-pet")
     public void createPetWithDifferentStatuses(Pet pet, String scenarioDescription) throws IOException {
-        var responsePet = Steps.CreatePet(pet);
-        Steps.AssertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
     @DataProvider(name = "possible-categories-to-create-pet")
@@ -90,8 +90,8 @@ public class Post {
 
     @Test (dataProvider = "possible-categories-to-create-pet")
     public void possibleCategoriesToCreatePet(Pet pet, String scenarioDescription) throws IOException {
-        var responsePet = Steps.CreatePet(pet);
-        Steps.AssertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
     @DataProvider(name = "possible-tags-to-create-pet")
@@ -117,7 +117,7 @@ public class Post {
 
     @Test (dataProvider = "possible-tags-to-create-pet")
     public void possibleTagsToCreatePet(Pet pet, String scenarioDescription) throws IOException {
-        var responsePet = Steps.CreatePet(pet);
-        Steps.AssertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 }
