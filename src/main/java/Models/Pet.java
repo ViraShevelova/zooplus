@@ -40,6 +40,12 @@ public class Pet extends KeyName {
         return this;
     }
 
+    public Pet withPhotoUrls(String... urls) {
+        this.photoUrls.clear();
+        this.photoUrls.addAll(Arrays.stream(urls).toList());
+        return this;
+    }
+
     public Statuses getStatus() {
         return status;
     }
@@ -49,7 +55,7 @@ public class Pet extends KeyName {
     }
 
     private KeyName Category;
-    private ArrayList<String> photoUrls = new ArrayList<>();;
+    private ArrayList<String> photoUrls = new ArrayList<>();
     private List<KeyName> tags = new ArrayList<>();
     private Statuses status;
 
@@ -70,6 +76,12 @@ public class Pet extends KeyName {
     public Pet withCategory(KeyName category)
     {
         setCategory(category);
+        return this;
+    }
+
+    public KeyName withUpdatedNameAndStatus() {
+        setName(RandomGenerator.getRandomString(25));
+        setStatus(Statuses.NotExisted);
         return this;
     }
 

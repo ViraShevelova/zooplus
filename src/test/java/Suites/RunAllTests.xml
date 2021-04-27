@@ -5,6 +5,9 @@
             <class name="MethodTests.FindPetById" />
             <class name="MethodTests.FindPetsByStatus" />
             <class name="MethodTests.Post" />
+            <class name="MethodTests.UploadImage" />
+            <class name="MethodTests.UpdatePetById" />
+            <class name="MethodTests.Put" />
         </classes>
     </test>
 </suite>

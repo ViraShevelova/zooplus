@@ -47,6 +47,11 @@ public class KeyName {
         return this;
     }
 
+    public KeyName withNegativeLongId() {
+        setId(-RandomGenerator.getRandomPositiveLong());
+        return this;
+    }
+
     public KeyName withZeroId() {
         setId(0L);
         return this;
