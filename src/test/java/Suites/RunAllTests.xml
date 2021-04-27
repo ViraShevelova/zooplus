@@ -1,0 +1,10 @@
+<suite name="RunAllTests">
+    <test name="testing">
+        <classes>
+            <class name="MethodTests.DeletePet" />
+            <class name="MethodTests.FindPetById" />
+            <class name="MethodTests.FindPetsByStatus" />
+            <class name="MethodTests.Post" />
+        </classes>
+    </test>
+</suite>
