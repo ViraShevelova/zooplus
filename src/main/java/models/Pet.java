@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class Pet extends KeyName {
 
@@ -36,13 +37,13 @@ public final class Pet extends KeyName {
 
     public Pet withTags(final KeyName... tags) {
         this.tags.clear();
-        this.tags.addAll(Arrays.stream(tags).toList());
+        this.tags.addAll(Arrays.stream(tags).collect(Collectors.toList()));
         return this;
     }
 
     public Pet withPhotoUrls(final String... urls) {
         this.photoUrls.clear();
-        this.photoUrls.addAll(Arrays.stream(urls).toList());
+        this.photoUrls.addAll(Arrays.stream(urls).collect(Collectors.toList()));
         return this;
     }
 

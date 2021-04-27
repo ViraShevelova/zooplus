@@ -6,6 +6,8 @@ import enums.Statuses;
 import models.KeyName;
 import models.Pet;
 
+import java.util.stream.Collectors;
+
 public class ModelsConvertor {
 
     private ModelsConvertor() { }
@@ -26,7 +28,7 @@ public class ModelsConvertor {
                         tagDto.setName(tag.getName());
                         return tagDto;
                     })
-                .toList();
+                .collect(Collectors.toList());
         petDto.getTags().addAll(tagDtos);
         petDto.setPhotoUrls(pet.getPhotoUrls());
         petDto.setStatus(pet.getStatus() != null ? pet.getStatus().getName() : null);
@@ -47,7 +49,7 @@ public class ModelsConvertor {
                         .stream()
                         .map(tagDto ->
                                 new KeyName().withId(tagDto.getId()).withName(tagDto.getName()))
-                        .toList();
+                        .collect(Collectors.toList());
         pet.setTags(tags);
         pet.setPhotoUrls(petDto.getPhotoUrls());
         return pet;

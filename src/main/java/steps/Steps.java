@@ -2,11 +2,12 @@ package steps;
 
 import api.ApiRequests;
 import enums.Statuses;
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
 import models.Pet;
+import org.testng.Assert;
 import utils.JSONHelper;
 import utils.ModelsConvertor;
-import io.restassured.response.Response;
-import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,6 +44,7 @@ public final class Steps {
         return response;
     }
 
+    @Step("Create a pet with id {pet.id}")
     public static Pet createPet(final Pet pet) throws IOException {
         var response = ApiRequests.postPet(JSONHelper.convertToJSON(ModelsConvertor.ConvertToDto(pet)));
         Assert.assertEquals(response.statusCode(), SUCCESS_CODE, "Response status code");
