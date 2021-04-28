@@ -1,0 +1,10 @@
+1) There are no validations on Tags
+2) There are no validations on Statuses
+3) There are no validations on Categories
+4) Any value can be null
+
+
+Found bugs:
+- Internal server error if to specify id longer than long;
+- FindByStatus does not search by multiple status;
+- FindByStatus is case sensetive;
