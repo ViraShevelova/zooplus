@@ -1,0 +1,4 @@
+As a CI process. It should be used some kind of continuous integration tool like TeamCity or Jenkings.
+Allure, which is used in the test poject is integrated with both of them.
+Configuration is described in allure documentation in the link below
+https://docs.qameta.io/allure/#_jenkins
