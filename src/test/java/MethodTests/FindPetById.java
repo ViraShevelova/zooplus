@@ -1,9 +1,9 @@
 package MethodTests;
 
 import models.Pet;
-import steps.Steps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import steps.Steps;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class FindPetById {
         };
     }
 
-    @Test(dataProvider = "possible-ids-to-create-pet")
+    @Test(dataProvider = "possible-ids-to-create-pet", description = "Find Pet By Existed Id")
     public void findPetByExistedId(Pet pet, String scenarioDescription) throws IOException {
         var createdPet = Steps.createPet(pet);
         var foundPet = Steps.getPet(createdPet.getId());
@@ -27,7 +27,7 @@ public class FindPetById {
                 "Pet is found by existed id" + scenarioDescription);
     }
 
-    @Test
+    @Test(description = "Find Pet By Not Existed Id")
     public void findPetByNotExistedId() {
         var pet = new Pet().withSimpleFields();
         Steps.getNotExistedPet(pet);

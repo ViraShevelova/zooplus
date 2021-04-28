@@ -113,6 +113,10 @@ public final class Pet extends KeyName {
 
     @Override
     public String toString() {
+        return "Pet{Id=" + getId() + '}';
+    }
+
+    public String toFullString() {
         return "Pet{"
                 + "Id=" + getId()
                 + ", Category=" + category

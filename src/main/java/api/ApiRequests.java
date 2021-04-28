@@ -1,8 +1,10 @@
 package api;
 
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+
 import java.io.File;
 import java.util.List;
 
@@ -16,6 +18,8 @@ public final class ApiRequests {
   private static final String ADD_UPDATE_PET_URL = "/pet";
   private static final String FIND_PETS_BY_STATUS_URL = "/pet/findByStatus";
   private static final String FIND_UPDATE_DELETE_PET_BY_ID_URL = "/pet/{petId}";
+  private static final String REQUEST_BODY = "Request body";
+  private static final String RESPONSE_BODY = "Response body";
 
   private ApiRequests() { }
 
@@ -59,13 +63,17 @@ public final class ApiRequests {
   private static Response get(final String url) {
     RestAssured.baseURI = BASE_URL;
     RequestSpecification request = RestAssured.given();
+    var response  = request.get(url);
+    Allure.addAttachment(url, response.asPrettyString());
     return request.get(url);
   }
 
   public static Response delete(final String url) {
     RestAssured.baseURI = BASE_URL;
     RequestSpecification request = RestAssured.given();
-    return request.delete(url);
+    var response  = request.delete(url);
+    Allure.addAttachment("Response body", response.asPrettyString());
+    return response;
   }
 
   private static Response post(final String url, final String body) {
@@ -73,7 +81,10 @@ public final class ApiRequests {
     RequestSpecification request = RestAssured.given();
     request.header("Content-Type", "application/json");
     request.body(body);
-    return request.post(url);
+    Allure.addAttachment(REQUEST_BODY, body);
+    var response  = request.post(url);
+    Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
+    return response;
   }
 
   private static Response put(final String url, final String body) {
@@ -81,7 +92,9 @@ public final class ApiRequests {
     RequestSpecification request = RestAssured.given();
     request.header("Content-Type", "application/json");
     request.body(body);
-    return request.put(url);
+    var response  = request.put(url);
+    Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
+    return response;
   }
 
   private static Response postWithFileUpload(final String url, final String fileToUpload) {
@@ -91,7 +104,9 @@ public final class ApiRequests {
     request.header("Content-Type", "multipart/form-data");
     request.header("accept", "application/json");
     request.formParam("additionalMetadata", "additional metadataT&*^*&$%^#%^#$%#@#@#$#%^&$&^$%&^");
-    return request.post(url);
+    var response  = request.post(url);
+    Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
+    return response;
   }
 
   private static Response postUpdateById(final String url, final String name, final String status) {
@@ -100,6 +115,8 @@ public final class ApiRequests {
     request.header("Content-Type", "application/x-www-form-urlencoded");
     request.header("accept", "application/json");
     request.formParams("name", name, "status", status);
-    return request.post(url);
+    var response  = request.post(url);
+    Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
+    return response;
   }
 }

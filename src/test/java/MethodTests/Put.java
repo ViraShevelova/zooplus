@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Put {
 
-    @Test
+    @Test(description = "Update pet name")
     public void updateName() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withName(RandomGenerator.getRandomString(25));
@@ -19,7 +19,7 @@ public class Put {
         Steps.assertThatThisIsExpectedPet(createdPet, updatedPet, "Update first name");
     }
 
-    @Test
+    @Test(description = "Update pet status")
     public void updateStatus() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withStatus(Statuses.NotExisted);
@@ -27,7 +27,7 @@ public class Put {
         Steps.assertThatThisIsExpectedPet(createdPet, updatedPet, "Update status");
     }
 
-    @Test
+    @Test(description = "Update pet tags")
     public void updateTags() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withTags(new KeyName(), new KeyName(), new KeyName(), new KeyName());
@@ -35,7 +35,7 @@ public class Put {
         Steps.assertThatThisIsExpectedPet(createdPet, updatedPet, "Update tags");
     }
 
-    @Test
+    @Test(description = "Update pet category")
     public void updateCategory() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withCategory(new KeyName());
@@ -43,7 +43,7 @@ public class Put {
         Steps.assertThatThisIsExpectedPet(createdPet, updatedPet, "Update category");
     }
 
-    @Test
+    @Test(description = "Update pet urls")
     public void updatePhotoUrls() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withPhotoUrls(

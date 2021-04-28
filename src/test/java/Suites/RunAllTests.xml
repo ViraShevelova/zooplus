@@ -1,5 +1,5 @@
-<suite name="RunAllTests">
-    <test name="testing">
+<suite name="Run All Tests">
+    <test name="Pet tests">
         <classes>
             <class name="MethodTests.DeletePet" />
             <class name="MethodTests.FindPetById" />

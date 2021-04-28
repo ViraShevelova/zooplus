@@ -23,7 +23,7 @@ public class Post {
         };
     }
 
-    @Test (dataProvider = "possible-ids-to-create-pet")
+    @Test (dataProvider = "possible-ids-to-create-pet", description = "Create Pet With Different Ids")
     public void createPetWithDifferentIds(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
@@ -39,7 +39,7 @@ public class Post {
         };
     }
 
-    @Test (dataProvider = "possible-names-to-create-pet")
+    @Test (dataProvider = "possible-names-to-create-pet", description = "Create Pet With Different Names")
     public void createPetWithDifferentNames(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
@@ -61,7 +61,7 @@ public class Post {
         };
     }
 
-    @Test (dataProvider = "possible-statuses-to-create-pet")
+    @Test (dataProvider = "possible-statuses-to-create-pet", description = "Create Pet With Different Statuses")
     public void createPetWithDifferentStatuses(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
@@ -88,7 +88,7 @@ public class Post {
         };
     }
 
-    @Test (dataProvider = "possible-categories-to-create-pet")
+    @Test (dataProvider = "possible-categories-to-create-pet", description = "Create Pet With Different Categories")
     public void possibleCategoriesToCreatePet(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
@@ -115,7 +115,7 @@ public class Post {
         };
     }
 
-    @Test (dataProvider = "possible-tags-to-create-pet")
+    @Test (dataProvider = "possible-tags-to-create-pet", description = "Create Pet With Different Tags")
     public void possibleTagsToCreatePet(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);

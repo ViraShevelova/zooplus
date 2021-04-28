@@ -21,7 +21,7 @@ public class FindPetsByStatus {
         };
     }
 
-    @Test(dataProvider = "statuses")
+    @Test(dataProvider = "statuses", description = "Find Pet By Status")
     public void findPetByStatus(Statuses status, String scenarioDescription) throws IOException {
         var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(status));
         var pets = Steps.getPetsByStatuses(status);
@@ -37,7 +37,7 @@ public class FindPetsByStatus {
         };
     }
 
-    @Test(dataProvider = "emptyStatuses")
+    @Test(dataProvider = "emptyStatuses", description = "Find Pet By Empty Status")
     public void findPetByEmptyStatus(Statuses status, String scenarioDescription) throws IOException {
         var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(status));
         var pets = Steps.getPetsByStatuses(status);
@@ -45,7 +45,7 @@ public class FindPetsByStatus {
                 "There is created pet in the list for status:" + scenarioDescription);
     }
 
-    @Test
+    @Test(description = "Find Pets By Multiple Statuses")
     public void findPetsByMultipleStatuses() throws IOException {
         var availablePet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Available));
         var soldPet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Sold));
@@ -56,13 +56,13 @@ public class FindPetsByStatus {
                 "There is created pet in the list for status:" + Statuses.Sold);
     }
 
-    @Test
+    @Test(description = "Find Pets without Statuses")
     public void findPetsWithoutStatus() throws IOException {
         var pets = Steps.getPetsByStatuses();
         Assert.assertTrue(pets.isEmpty(),"none of pets should be returned");
     }
 
-    @Test
+    @Test(description = "Check that status is not case sensitive")
     public void checkThatStatusIsNotCaseSensitive() throws IOException {
         var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Available));
         var pets = Steps.getPetsByStatuses(Statuses.AvailableLowerCase);

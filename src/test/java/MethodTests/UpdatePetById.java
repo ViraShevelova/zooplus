@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class UpdatePetById {
-    @Test
+    @Test(description = "Update existed pet by id")
     public void updateExistedPetId() throws IOException {
         var createdPet = Steps.createPet(new Pet().withSimpleFields());
         createdPet.withUpdatedNameAndStatus();
@@ -16,7 +16,7 @@ public class UpdatePetById {
         Steps.assertThatThisIsExpectedPet(createdPet, updatedPet, "Pet is updated");
     }
 
-    @Test
+    @Test(description = "Update not existed pet by id")
     public void updateNotExistedPetId() {
         var createdPet = new Pet().withSimpleFields();
         Steps.updateNotExistedPetById(createdPet);
