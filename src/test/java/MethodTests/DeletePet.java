@@ -1,13 +1,11 @@
 package MethodTests;
 
-import io.qameta.allure.Feature;
 import models.Pet;
 import org.testng.annotations.Test;
 import steps.Steps;
 
 import java.io.IOException;
 
-@Feature("Delete Test")
 public class DeletePet {
 
     @Test(description = "Delete existed pet")
