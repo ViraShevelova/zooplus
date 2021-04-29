@@ -2,9 +2,18 @@
 2) There are no validations on Statuses
 3) There are no validations on Categories
 4) Any value can be null
+5) Post and put work edentical(that's why I haven't created all checks for put), would ask if it is expected
+6) Cannot update pet by id with null/empty name/status
+7) uploaded images are not saved to photoUrls
 
 
 Found bugs:
-- Internal server error if to specify id longer than long;
 - FindByStatus does not search by multiple status;
 - FindByStatus is case sensetive;
+- When I specify id negative, zero, long, response returns me another id, but if I do get after that, I get a correct id
+- For longs, negative values Post returns different id
+- I can upload a file for not existed pet
+
+// Not done
+ - Invalid input (returns 500)
+ - id longer than long;
