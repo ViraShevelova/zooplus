@@ -43,7 +43,7 @@ public class ModelsConvertor {
                 ? new KeyName().withId(petDto.getCategory().getId()).withName(petDto.getCategory().getName())
                 : null;
         pet.setCategory(category);
-        pet.setStatus(petDto.getStatus() != null ? Statuses.getStatusByName(petDto.getStatus()) : null);
+        pet.setStatus(Statuses.getStatusByName(petDto.getStatus()));
         var tags =
                 petDto.getTags()
                         .stream()

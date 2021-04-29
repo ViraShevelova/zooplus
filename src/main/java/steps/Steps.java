@@ -67,12 +67,19 @@ public final class Steps {
     }
 
     @Step("Upload image pet by id = {pet.id}")
-    public static Pet uploadImageForPet(final Pet pet, final String imageUrl) throws IOException {
+    public static Response uploadImageForPet(final Pet pet, final String imageUrl) {
         var response =
                 ApiRequests.uploadImageForPetPetId(pet.getId(), imageUrl);
         Assert.assertEquals(response.statusCode(), SUCCESS_CODE, "Response status code");
-        var petDTO = JSONHelper.convertToPetDto(response.body().asString());
-        return ModelsConvertor.convertToPet(petDTO);
+        return response;
+    }
+
+    @Step("Upload image pet by id = {pet.id}")
+    public static Response uploadImageForNotExistedPet(final Pet pet, final String imageUrl) {
+        var response =
+                ApiRequests.uploadImageForPetPetId(pet.getId(), imageUrl);
+        Assert.assertEquals(response.statusCode(), NOT_FOUND_CODE, "Response status code");
+        return response;
     }
 
     @Step("Update pet by id = {pet.id}. Set name = {pet.name} and status = {pet.status}")

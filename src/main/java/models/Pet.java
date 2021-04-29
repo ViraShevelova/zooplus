@@ -43,7 +43,13 @@ public final class Pet extends KeyName {
 
     public Pet withPhotoUrls(final String... urls) {
         this.photoUrls.clear();
-        this.photoUrls.addAll(Arrays.stream(urls).collect(Collectors.toList()));
+        this.photoUrls.addAll(Arrays.asList(urls));
+        return this;
+    }
+
+    public Pet withNullPhotoUrl() {
+        this.photoUrls.clear();
+        this.photoUrls.add(null);
         return this;
     }
 
@@ -99,21 +105,23 @@ public final class Pet extends KeyName {
             return false;
         }
         Pet pet = (Pet) o;
-        boolean result = false;
+        var result = false;
         try {
-            result =  getId().equals(pet.getId())
-                    && ((getCategory() == null && pet.getCategory() == null) || getCategory().equals(pet.getCategory()))
+            result = getId().equals(pet.getId())
+                    && ((getCategory() == null && pet.getCategory() == null)
+                    || getCategory().equals(pet.getCategory()))
                     && ((getName() == null && pet.getName() == null) || getName().equals(pet.getName()))
                     && getPhotoUrls().equals(pet.getPhotoUrls())
                     && getTags().equals(pet.getTags())
-                    && getStatus() == pet.getStatus();
-        } catch (Exception e) { }
-        return result;
+                    && getStatus().equals(pet.getStatus());
+        }
+        catch (Exception ex) { }
+        return   result;
     }
 
     @Override
     public String toString() {
-        return "Pet{Id=" + getId() + '}';
+        return toFullString();
     }
 
     public String toFullString() {

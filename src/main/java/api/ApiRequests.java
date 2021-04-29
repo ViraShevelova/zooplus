@@ -103,7 +103,7 @@ public final class ApiRequests {
             .multiPart("file", new File(fileToUpload), "image/jpeg");
     request.header("Content-Type", "multipart/form-data");
     request.header("accept", "application/json");
-    request.formParam("additionalMetadata", "additional metadataT&*^*&$%^#%^#$%#@#@#$#%^&$&^$%&^");
+    request.formParam("additionalMetadata", "additional metadata");
     var response  = request.post(url);
     Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
     return response;
@@ -114,7 +114,8 @@ public final class ApiRequests {
     RequestSpecification request = RestAssured.given();
     request.header("Content-Type", "application/x-www-form-urlencoded");
     request.header("accept", "application/json");
-    request.formParams("name", name, "status", status);
+    request.formParam("name", name);
+    request.formParam("status", status);
     var response  = request.post(url);
     Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
     return response;

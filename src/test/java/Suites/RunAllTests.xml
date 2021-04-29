@@ -3,7 +3,7 @@
     <test name="Pet tests">
         <classes>
             <class name="MethodTests.DeletePet" />
-            <class name="MethodTests.FindPetById" />
+            <class name="MethodTests.GetPetById" />
             <class name="MethodTests.FindPetsByStatus" />
             <class name="MethodTests.Post" />
             <class name="MethodTests.UploadImage" />

@@ -7,13 +7,14 @@ import java.util.NoSuchElementException;
 
 public enum Statuses {
     Available("Available"),
+    PartOfAvailable("Avai"),
     AvailableLowerCase("available"),
     Pending("Pending"),
     Sold("Sold"),
     NotExisted("NotExisted"),
-    Null(null),
+    SpecialCharacters(RandomGenerator.SPECIAL_CHARACTERS_STRING),
     Empty(""),
-    SpecialCharacters(RandomGenerator.SPECIAL_CHARACTERS_STRING);
+    Null(null);
 
     public String getName() {
         return name;
@@ -26,8 +27,10 @@ public enum Statuses {
     }
 
     public static Statuses getStatusByName(final String name) {
+        if (name == null)
+            return Null;
         return Arrays.stream(Statuses.values())
-                .filter(status -> status.name.equals(name))
+                .filter(status -> status.getName().equals(name))
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }

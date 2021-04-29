@@ -29,20 +29,12 @@ public class FindPetsByStatus {
                 "There is created pet in the list for status:" + scenarioDescription);
     }
 
-    @DataProvider(name = "emptyStatuses")
-    public Object[][] EmptyStatuses(){
-        return new Object[][] {
-                // { Statuses.Null, "null status"},
-                // { Statuses.Empty, "emptyString status"}
-        };
-    }
-
-    @Test(dataProvider = "emptyStatuses", description = "Find Pet By Empty Status")
-    public void findPetByEmptyStatus(Statuses status, String scenarioDescription) throws IOException {
-        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(status));
-        var pets = Steps.getPetsByStatuses(status);
+    @Test(description = "Find Pet By Empty Status")
+    public void findPetByEmptyStatus() throws IOException {
+        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Empty));
+        var pets = Steps.getPetsByStatuses(Statuses.Empty);
         Assert.assertTrue(pets.contains(pet),
-                "There is created pet in the list for status:" + scenarioDescription);
+                "There is created pet in the list for status: empty string");
     }
 
     @Test(description = "Find Pets By Multiple Statuses")
@@ -63,10 +55,18 @@ public class FindPetsByStatus {
     }
 
     @Test(description = "Check that status is not case sensitive")
-    public void checkThatStatusIsNotCaseSensitive() throws IOException {
+    public void checkThatStatusIsCaseSensitive() throws IOException {
         var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.Available));
         var pets = Steps.getPetsByStatuses(Statuses.AvailableLowerCase);
-        Assert.assertTrue(pets.contains(pet),
+        Assert.assertFalse(pets.contains(pet),
+                "There is created pet in the list for status:" + Statuses.Available);
+    }
+
+    @Test(description = "Check that status is not case sensitive")
+    public void checkThatStatusCannotBeFoundByAPartOfTheText() throws IOException {
+        var pet = Steps.createPet(new Pet().withSimpleFields().withStatus(Statuses.PartOfAvailable));
+        var pets = Steps.getPetsByStatuses(Statuses.Available);
+        Assert.assertFalse(pets.contains(pet),
                 "There is created pet in the list for status:" + Statuses.Available);
     }
 }

@@ -1,67 +1,35 @@
 package MethodTests;
 
-import enums.Statuses;
+import Providers.StaticProvider;
 import models.KeyName;
 import models.Pet;
-import steps.Steps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import steps.Steps;
+import utils.RandomGenerator;
 
 import java.io.IOException;
 
 public class Post {
-
-    @DataProvider(name = "possible-ids-to-create-pet")
-    public Object[][] possibleIdsToCreatePet(){
-        return new Object[][] {
-                { new Pet().withSimpleFields(), " id is a positive integer"},
-                { new Pet().withSimpleFields().withNegativeId(), "id is a negative integer"},
-                { new Pet().withSimpleFields().withZeroId(), "id equals zero"},
-                { new Pet().withSimpleFields().withId(null), "id equals null"},
-                { new Pet().withSimpleFields().withLongId(), "id is long"},
-                { new Pet().withSimpleFields().withMoreThanLongId(), "more than long id"},
-        };
-    }
-
-    @Test (dataProvider = "possible-ids-to-create-pet", description = "Create Pet With Different Ids")
+    @Test (dataProvider = "possible-ids-to-create-pet",
+            dataProviderClass = StaticProvider.class,
+            description = "Create Pet With Different Ids")
     public void createPetWithDifferentIds(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
-    @DataProvider(name = "possible-names-to-create-pet")
-    public Object[][] possibleINamesToCreatePet(){
-        return new Object[][] {
-                { new Pet().withSimpleFields().withLongName(), " with long name"},
-                { new Pet().withSimpleFields().withName(null), " with null name"},
-                { new Pet().withSimpleFields().withName(""), " with empty name"},
-                { new Pet().withSimpleFields().withNameWithSpecialCharacters(), " with name with special characters"},
-        };
-    }
-
-    @Test (dataProvider = "possible-names-to-create-pet", description = "Create Pet With Different Names")
+    @Test(dataProvider = "possible-names-to-create-pet",
+            dataProviderClass = StaticProvider.class,
+            description = "Create Pet With Different Names")
     public void createPetWithDifferentNames(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }
 
-    @DataProvider(name = "possible-statuses-to-create-pet")
-    public Object[][] possibleStatusesPet(){
-        return new Object[][] {
-                { new Pet().withSimpleFields().withStatus(Statuses.Available), "with status Available"},
-                { new Pet().withSimpleFields().withStatus(Statuses.Sold), "with status Sold"},
-                { new Pet().withSimpleFields().withStatus(Statuses.Pending), "with status Pending"},
-                { new Pet().withSimpleFields().withStatus(Statuses.AvailableLowerCase),
-                        "with status Available written in lower case"},
-                { new Pet().withSimpleFields().withStatus(Statuses.NotExisted), "with not existed status"},
-                { new Pet().withSimpleFields().withStatus(Statuses.Null), "with null status"},
-                { new Pet().withSimpleFields().withStatus(Statuses.Empty), "with empty status"},
-                { new Pet().withSimpleFields().withStatus(Statuses.SpecialCharacters),
-                        "with special characters in status"},
-        };
-    }
-
-    @Test (dataProvider = "possible-statuses-to-create-pet", description = "Create Pet With Different Statuses")
+    @Test(dataProvider = "possible-statuses-to-create-pet",
+            dataProviderClass = StaticProvider.class,
+            description = "Create Pet With Different Statuses")
     public void createPetWithDifferentStatuses(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
@@ -71,7 +39,6 @@ public class Post {
     public Object[][] possibleCategoriesPet(){
         return new Object[][] {
                 { new Pet().withSimpleFields().withCategory(new KeyName()), "with simple category"},
-                // there are no validations on category
                 { new Pet().withSimpleFields().withCategory(null), "with null category"},
                 { new Pet().withSimpleFields().withCategory(new KeyName().withId(null)),
                         "with null id in category"},
@@ -99,7 +66,6 @@ public class Post {
         var tag = new KeyName();
         return new Object[][] {
                 { new Pet().withSimpleFields().withTags(new KeyName()), "with simple tag"},
-                // there are no validations on tags(it can be tags with the same id by different names)
                 { new Pet().withSimpleFields().withTags(tag, new KeyName(tag)), "with the same tags"},
                 { new Pet().withSimpleFields().withTags(), "without tags"},
                 { new Pet().withSimpleFields().withTags(new KeyName().withId(null)), "tag with null id"},
@@ -110,13 +76,34 @@ public class Post {
                 { new Pet().withSimpleFields().withTags(new KeyName().withName("")), "tag with empty name"},
                 { new Pet().withSimpleFields().withTags(new KeyName().withNameWithSpecialCharacters()),
                         "tag with special characters in name"},
-                //{ new Pet().withSimpleFields().withTags(null), "null tag"},
-
         };
     }
 
     @Test (dataProvider = "possible-tags-to-create-pet", description = "Create Pet With Different Tags")
     public void possibleTagsToCreatePet(Pet pet, String scenarioDescription) throws IOException {
+        var responsePet = Steps.createPet(pet);
+        Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
+    }
+
+    @DataProvider(name = "possible-photo-urls-to-create-pet")
+    public Object[][] possiblePhotoUrlsPet(){
+        return new Object[][] {
+                { new Pet().withSimpleFields().withPhotoUrls(
+                        RandomGenerator.getRandomString(25, 100)), "with simple string"},
+                { new Pet().withSimpleFields().withPhotoUrls(
+                        RandomGenerator.getRandomString(25, 100),
+                        RandomGenerator.getRandomString(25, 100)),
+                        "with multiple photo urls"},
+                { new Pet().withSimpleFields().withPhotoUrls(""), "with empty photo url"},
+                { new Pet().withSimpleFields().withNullPhotoUrl(), "with null photo url"},
+                { new Pet().withSimpleFields().withPhotoUrls(
+                        RandomGenerator.getRandomStringWithSpecialCharacters(25)),
+                        "with special characters photo url"},
+        };
+    }
+
+    @Test (dataProvider = "possible-photo-urls-to-create-pet", description = "Create Pet With Different Photo Urls")
+    public void possiblePhotoUrlsToCreatePet(Pet pet, String scenarioDescription) throws IOException {
         var responsePet = Steps.createPet(pet);
         Steps.assertThatThisIsExpectedPet(pet, responsePet, scenarioDescription);
     }

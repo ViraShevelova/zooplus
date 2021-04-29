@@ -94,8 +94,8 @@ public class KeyName {
             return false;
         }
         KeyName keyName = (KeyName) o;
-        return getId().equals(keyName.getId())
-                && Objects.equals(getName(), keyName.getName());
+        return ((getId() == null && keyName.getId() == null) || getId().equals(keyName.getId()))
+                && ((getName() == null && keyName.getName() == null) || getName().equals(keyName.getName()));
     }
 
     @Override
