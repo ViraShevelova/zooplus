@@ -13,3 +13,7 @@ Found bugs:
 - When I specify id negative, zero, long, response returns me another id, but if I do get after that, I get a correct id
 - For longs, negative values Post returns different id
 - I can upload a file for not existed pet
+
+// Not done
+ - Invalid input (returns 500)
+ - id longer than long;
