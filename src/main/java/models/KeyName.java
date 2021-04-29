@@ -60,11 +60,6 @@ public class KeyName {
         return this;
     }
 
-    public KeyName withMoreThanLongId() {
-        setId(Long.MAX_VALUE + 1);
-        return this;
-    }
-
     public KeyName withName(final String name) {
         setName(name);
         return this;

@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class RandomGenerator {
     public static final String SPECIAL_CHARACTERS_STRING = "~`!@#$%^&*()-_=+[{]}\\<.>/?";
+    public static final String ALL_CHARACTERS =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
 
     private RandomGenerator() { }
 
@@ -19,9 +21,7 @@ public class RandomGenerator {
     }
 
     public static String getRandomStringWithSpecialCharacters(final int length) {
-        String characters =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
-        return RandomStringUtils.random(length, characters);
+        return RandomStringUtils.random(length, ALL_CHARACTERS);
     }
 
     public static int getRandomInt() {

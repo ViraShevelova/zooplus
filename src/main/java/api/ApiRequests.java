@@ -14,10 +14,10 @@ import java.util.List;
  */
 public final class ApiRequests {
   private static final String BASE_URL = "https://petstore.swagger.io/v2";
-  private static final String UPLOAD_IMAGE_URL = "/pet/{petId}/uploadImage";
+  private static final String UPLOAD_IMAGE_URL = "/pet/%s/uploadImage";
   private static final String ADD_UPDATE_PET_URL = "/pet";
   private static final String FIND_PETS_BY_STATUS_URL = "/pet/findByStatus";
-  private static final String FIND_UPDATE_DELETE_PET_BY_ID_URL = "/pet/{petId}";
+  private static final String FIND_UPDATE_DELETE_PET_BY_ID_URL = "/pet/%s";
   private static final String REQUEST_BODY = "Request body";
   private static final String RESPONSE_BODY = "Response body";
 
@@ -32,19 +32,19 @@ public final class ApiRequests {
   }
 
   public static Response getPetById(final Long id) {
-    return get(FIND_UPDATE_DELETE_PET_BY_ID_URL.replace("{petId}", String.valueOf(id)));
+    return get(setPetIdForUrl(FIND_UPDATE_DELETE_PET_BY_ID_URL, id));
   }
 
   public static Response deletePetId(final Long id) {
-    return delete(FIND_UPDATE_DELETE_PET_BY_ID_URL.replace("{petId}", String.valueOf(id)));
+    return delete(setPetIdForUrl(FIND_UPDATE_DELETE_PET_BY_ID_URL, id));
   }
 
   public static Response uploadImageForPetPetId(final Long id, final String imageUrl) {
-    return postWithFileUpload(UPLOAD_IMAGE_URL.replace("{petId}", String.valueOf(id)), imageUrl);
+    return postWithFileUpload(setPetIdForUrl(UPLOAD_IMAGE_URL,id), imageUrl);
   }
 
   public static Response updatePetPetId(final Long id, final String firstName, final String status) {
-    return postUpdateById(FIND_UPDATE_DELETE_PET_BY_ID_URL.replace("{petId}", String.valueOf(id)), firstName, status);
+    return postUpdateById(setPetIdForUrl(FIND_UPDATE_DELETE_PET_BY_ID_URL,id), firstName, status);
   }
 
   public static Response getPetsByStatuses(final List<String> statuses) {
@@ -119,5 +119,9 @@ public final class ApiRequests {
     var response  = request.post(url);
     Allure.addAttachment(RESPONSE_BODY, response.asPrettyString());
     return response;
+  }
+
+  private static String setPetIdForUrl(String url, Long petId) {
+      return String.format(url, petId);
   }
 }

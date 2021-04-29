@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public final class JSONHelper {
     private JSONHelper() { }
-    public static String convertToJSON(final PetDto petDto) throws IOException {
+    public static String convertToJSON(final Object petDto) throws IOException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(petDto);
     }

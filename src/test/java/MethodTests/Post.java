@@ -46,8 +46,6 @@ public class Post {
                         "with negative id in category"},
                 { new Pet().withSimpleFields().withCategory(new KeyName().withLongId()),
                         "with long id in category"},
-                { new Pet().withSimpleFields().withCategory(new KeyName().withMoreThanLongId()),
-                        "with more than long id in category"},
                 { new Pet().withSimpleFields().withCategory(new KeyName().withName("")), "with empty name in category"},
                 { new Pet().withSimpleFields().withCategory(new KeyName().withNameWithSpecialCharacters()),
                         "with special characters in name in category"},
